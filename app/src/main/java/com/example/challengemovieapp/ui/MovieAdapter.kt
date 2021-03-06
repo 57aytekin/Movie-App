@@ -10,7 +10,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.challengemovieapp.data.entities.Search
 import com.example.challengemovieapp.databinding.ItemMovieBinding
 
-class MovieAdapter : PagingDataAdapter<Search, MovieAdapter.MovieViewHolder>(SEARCH_COMPARATOR) {
+class MovieAdapter(private val listener : OnSearchItemClickListener) :
+    PagingDataAdapter<Search, MovieAdapter.MovieViewHolder>(SEARCH_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,8 +26,20 @@ class MovieAdapter : PagingDataAdapter<Search, MovieAdapter.MovieViewHolder>(SEA
         }
     }
 
-    class MovieViewHolder(private val binding : ItemMovieBinding) :
+    inner class MovieViewHolder(private val binding : ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root){
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val item = getItem(position)
+                    if (item != null){
+                        listener.onItemClick(item.imdbID)
+                    }
+                }
+            }
+        }
 
         fun bind(search: Search){
             binding.apply {
@@ -37,6 +50,10 @@ class MovieAdapter : PagingDataAdapter<Search, MovieAdapter.MovieViewHolder>(SEA
                 textView.text = search.Title
             }
         }
+    }
+
+    interface OnSearchItemClickListener{
+        fun onItemClick(movieId : String)
     }
 
     companion object {

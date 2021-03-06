@@ -1,6 +1,7 @@
 package com.example.challengemovieapp.ui
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,9 +13,10 @@ import androidx.lifecycle.observe
 import androidx.paging.LoadState
 import com.example.challengemovieapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+const val MOVIE_ID = "movie_id"
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MovieAdapter.OnSearchItemClickListener {
     private val viewModel by viewModels<MovieViewModel>()
     private lateinit var  binding: ActivityMainBinding
 
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter  = MovieAdapter()
+        val adapter  = MovieAdapter(this)
         viewModel.searchList.observe(this){
             adapter.submitData(lifecycle, it)
         }
@@ -80,5 +82,11 @@ class MainActivity : AppCompatActivity() {
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    override fun onItemClick(movieId: String) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra(MOVIE_ID, movieId)
+        startActivity(intent)
     }
 }

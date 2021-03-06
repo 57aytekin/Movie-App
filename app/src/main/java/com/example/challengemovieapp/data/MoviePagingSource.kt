@@ -16,7 +16,7 @@ class MoviePagingSource(
         val position = params.key ?: STARTING_PAGE_INDEX
 
         return try {
-            val response = movieApiInterface.getMovies(query, position)
+            val response = movieApiInterface.getSearch(query, position)
             var searchList = response.search
             if (searchList.isNullOrEmpty()) searchList = listOf()
 

@@ -18,4 +18,6 @@ class MovieRepository @Inject constructor(private val apiInterface: MovieApiInte
         ),
             pagingSourceFactory = { MoviePagingSource(apiInterface, query)}
         ).liveData
+
+    suspend fun getMovieDetail (movieId : String) = apiInterface.getMovieDetail(movieId)
 }

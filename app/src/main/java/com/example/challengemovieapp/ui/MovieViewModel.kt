@@ -7,6 +7,7 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.challengemovieapp.data.MovieRepository
+import kotlinx.coroutines.CoroutineScope
 
 class MovieViewModel @ViewModelInject constructor(
     private val repository: MovieRepository
@@ -15,6 +16,8 @@ class MovieViewModel @ViewModelInject constructor(
     val searchList = currentQuery.switchMap {queryString ->
         repository.getSearchResult(queryString).cachedIn(viewModelScope)
     }
+
+    suspend fun movieDetail(movieId : String)  = repository.getMovieDetail(movieId)
 
     fun searchMovie(query : String){
         currentQuery.value = query

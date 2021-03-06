@@ -1,7 +1,9 @@
 package com.example.challengemovieapp.data.api
 
+import com.example.challengemovieapp.data.entities.Movie
 import com.example.challengemovieapp.data.entities.MovieResponse
 import com.example.challengemovieapp.util.NetworkConnectionInterceptor
+import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -17,10 +19,15 @@ const val BASE_URL = "http://www.omdbapi.com/"
 interface MovieApiInterface {
 
     @GET("/")
-    suspend fun getMovies(
+    suspend fun getSearch(
         @Query("s") roverName : String,
         @Query("page") page : Int
     ): MovieResponse
+
+    @GET("/")
+    fun getMovieDetail(
+        @Query("i") movieId : String
+    ) : Single<Movie>
 
     companion object {
         operator fun invoke(
