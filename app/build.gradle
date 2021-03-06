@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,6 +48,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     def lifecycle_version = "2.2.0"
+    def paging_version = "3.0.0-beta01"
 
     //Retrofit and GSON
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
@@ -72,6 +76,9 @@ dependencies {
     //RXJAVA
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
+    //Paging 3
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
     //Dagger Hilt
     implementation "com.google.dagger:hilt-android:2.28-alpha"
