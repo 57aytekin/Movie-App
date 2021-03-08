@@ -1,4 +1,4 @@
-package com.example.challengemovieapp.data
+package com.example.challengemovieapp.data.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

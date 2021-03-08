@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.example.challengemovieapp.data.MovieRepository
+import com.example.challengemovieapp.data.repository.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 
 class MovieViewModel @ViewModelInject constructor(

@@ -1,5 +1,6 @@
 package com.example.challengemovieapp.data.api
 
+import com.example.challengemovieapp.BuildConfig
 import com.example.challengemovieapp.data.entities.Movie
 import com.example.challengemovieapp.data.entities.MovieResponse
 import com.example.challengemovieapp.util.NetworkConnectionInterceptor
@@ -13,7 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-const val API_KEY = "6ae5e6d5"
+const val API_KEY = BuildConfig.API_KEY
 const val BASE_URL = "http://www.omdbapi.com/"
 
 interface MovieApiInterface {
