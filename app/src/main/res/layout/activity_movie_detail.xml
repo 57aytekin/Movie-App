@@ -7,14 +7,15 @@
     android:background="@color/dark_gray"
     tools:context=".ui.MovieDetailActivity">
 
-    <ProgressBar
+    <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/detail_progress_bar"
+        style="@style/SpinKitView.Large.CubeGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/ProgressBarTheme"
+        android:layout_gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_gravity="center"/>
+        app:SpinKit_Color="@color/white" />
+
 
     <TextView
         android:id="@+id/tv_detail_error"
